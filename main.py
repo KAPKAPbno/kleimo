@@ -114,14 +114,13 @@ def process_video_sync(input_path: str, output_path: str, user_id: int, font_pat
         watermark = create_watermark_image(pil_img.size, settings, font_path)
         result = Image.alpha_composite(pil_img, watermark)
         return np.array(result.convert("RGB"))
-    new_clip = clip.fl_image(process_frame)
+    new_clip = clip.image_transform(process_frame)
     
     new_clip.write_videofile(
         output_path, 
         codec='libx264', 
         audio_codec='aac', 
         remove_temp=True,
-        verbose=False, 
         preset='medium' 
     )
     
