@@ -11,9 +11,12 @@ from aiogram.filters import Command
 from aiogram.types import FSInputFile
 from PIL import Image, ImageDraw, ImageFont, ImageColor
 from moviepy import VideoFileClip
+
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
+
 API_TOKEN = os.getenv('BOT_TOKEN')
+
 if not API_TOKEN:
     print("Error: BOT_TOKEN environment variable is not set.")
     sys.exit(1)
@@ -24,8 +27,8 @@ DEFAULTS = {
     'text': '@KleimoRobot',
     'color': '#FFFFFF',
     'size': 30,
-    'mode': 'single',
-    'pos': 'br'
+    'mode': 'multi',
+    'pos': 'center'
 }
 def get_user_settings(user_id):
     if user_id not in user_settings:
@@ -129,14 +132,14 @@ def process_video_sync(input_path: str, output_path: str, user_id: int, font_pat
 @dp.message(Command("start"))
 async def cmd_start(message: types.Message):
     await message.answer(
-        "Привет! Я @KleimoRobot.\\n"
-        "Отправь мне фото или видео, и я наложу на него водяной знак.\\n\\n"
-        "Настройки:\\n"
-        "/text [текст] - сменить текст\\n"
-        "/color [#RRGGBB] - цвет (HEX)\\n"
-        "/size [число] - размер шрифта\\n"
-        "/mode [single/multi] - режим\\n"
-        "/pos [tl, tr, bl, br, center] - позиция\\n\\n"
+        "Привет! Я @KleimoRobot.\n"
+        "Отправь мне фото или видео, и я наложу на него водяной знак.\n\n"
+        "Настройки:\n"
+        "/text [текст] - сменить текст\n"
+        "/color [#RRGGBB] - цвет (HEX)\n"
+        "/size [число] - размер шрифта\n"
+        "/mode [single/multi] - режим\n"
+        "/pos [tl, tr, bl, br, center] - позиция\n\n"
         "Отправь .ttf файл, чтобы сменить шрифт."
     )
 @dp.message(Command("text"))
