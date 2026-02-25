@@ -1,0 +1,7 @@
+.env
+__pycache__/
+*.pyc
+temp_in_*
+temp_out_*
+user_font.ttf
+*.log
